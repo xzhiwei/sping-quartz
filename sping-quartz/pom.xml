@@ -1,0 +1,253 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ssm.demo</groupId>
+  <artifactId>ssm-demo-test</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ssm-demo-test Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <build>
+    <finalName>ssm-demo-test</finalName>
+    <plugins>
+       <plugin>  
+	        <groupId>org.apache.maven.plugins</groupId>  
+	        <artifactId>maven-compiler-plugin</artifactId>  
+	        <version>2.3.2</version>  
+	        <configuration>  
+	            <source>1.7</source>  
+	            <target>1.7</target>
+	        </configuration>  
+	    </plugin>
+	    </plugins>
+  </build>
+  
+  <properties>
+		<java-version>1.7</java-version>
+		<org.springframework-version>4.2.0.RELEASE</org.springframework-version>
+		<mysql-connector-version>5.1.29</mysql-connector-version>
+		<mybatis-version>3.2.5</mybatis-version>
+		<mybatis-spring-version>1.2.2</mybatis-spring-version>
+		<mybatis-ehcache-version>1.0.0</mybatis-ehcache-version>
+		<ehcache-version>2.6.8</ehcache-version>
+		<aspectj-version>1.7.4</aspectj-version>
+		<json-version>2.3.2</json-version>
+  </properties>
+  <dependencies>
+  	<!-- 测试  -->
+    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>3.8.1</version>
+	      <scope>test</scope>
+    </dependency>
+    
+    <!-- spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${org.springframework-version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-web</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+     <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-jdbc</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-aop</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-aspects</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-core</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context-support</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-orm</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-oxm</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    
+    <!-- slf4j相关 -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>1.5.8</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.5.8</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.5.8</version>
+    </dependency>
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.14</version>
+    </dependency>
+    
+    <!-- jstl -->
+    <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>1.2</version>
+    </dependency>
+    
+    <!-- mybatis依赖包 -->
+    <dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql-connector-version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache-core</artifactId>
+		<version>${ehcache-version}</version>
+	</dependency>
+    <dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${mybatis-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>${mybatis-spring-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-ehcache</artifactId>
+		<version>${mybatis-ehcache-version}</version>
+	</dependency>
+	
+	<!-- 计划任务支持 quartz  -->
+	  <dependency>
+		   <groupId>org.quartz-scheduler</groupId>
+		   <artifactId>quartz</artifactId>
+		   <version>2.2.1</version>
+	  </dependency>
+	  
+	<!-- 二维码Qrcode -->
+	<dependency>
+		<groupId>com.google.zxing</groupId>
+		<artifactId>core</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+	
+	<!-- Json支持 -->
+	<dependency>  
+	    <groupId>com.fasterxml.jackson.jaxrs</groupId>  
+	    <artifactId>jackson-jaxrs-xml-provider</artifactId>  
+	    <version>2.4.1</version>  
+	</dependency>
+	<dependency>
+	    <groupId>org.codehaus.woodstox</groupId>
+	    <artifactId>stax2-api</artifactId>
+	    <version>3.1.4</version>
+	 </dependency>
+	 
+	 <!-- Web Socket 替换轮询，减少服务器压力 -->
+	 <dependency>  
+	    <groupId>javax.servlet</groupId>  
+	    <artifactId>javax.servlet-api</artifactId>  
+	    <version>3.1.0</version>  
+	</dependency>  
+	<dependency>  
+	    <groupId>com.fasterxml.jackson.core</groupId>  
+	    <artifactId>jackson-core</artifactId>  
+	    <version>2.3.0</version>  
+	</dependency>  
+	<dependency>  
+	    <groupId>com.fasterxml.jackson.core</groupId>  
+	    <artifactId>jackson-databind</artifactId>  
+	    <version>2.3.0</version>  
+	</dependency>
+	<dependency>  
+	   <groupId>org.springframework</groupId>  
+	   <artifactId>spring-websocket</artifactId>  
+	   <version>${org.springframework-version}</version>
+	</dependency>  
+	<dependency>
+	   <groupId>org.springframework</groupId>  
+	   <artifactId>spring-messaging</artifactId>  
+	   <version>${org.springframework-version}</version>
+	</dependency>  
+	
+	<!-- xfire For webserver -->
+	<dependency>
+		<groupId>org.springframework.ws</groupId>
+		<artifactId>spring-ws-core</artifactId>
+		<version>2.2.3.RELEASE</version>
+	</dependency>
+	
+	<!-- 验证企业信息的Httpclient -->
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-httpclient</groupId>
+		<artifactId>commons-httpclient</artifactId>
+		<version>3.1</version>
+	</dependency>
+	<!-- jsoup HTML parser library @ http://jsoup.org/ -->
+	<dependency>
+	  <groupId>org.jsoup</groupId>
+	  <artifactId>jsoup</artifactId>
+	  <version>1.8.3</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.json-lib</groupId> 
+		<artifactId>json-lib</artifactId> 
+		<classifier>jdk15</classifier> 
+		<version>2.2.3</version> 
+	</dependency>
+	
+	<dependency>
+	    <groupId>net.sourceforge.htmlunit</groupId>
+	    <artifactId>htmlunit</artifactId>
+	    <version>2.19</version>
+	</dependency>
+
+  </dependencies>
+</project>

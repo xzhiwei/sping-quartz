@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"   
+       xmlns:aop="http://www.springframework.org/schema/aop"   
+       xmlns:context="http://www.springframework.org/schema/context"  
+       xmlns:mvc="http://www.springframework.org/schema/mvc"   
+       xmlns:tx="http://www.springframework.org/schema/tx"   
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/websocket 
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd">  
+        
+        <mvc:annotation-driven />
+        <!-- 自动加载注解 -->
+        <context:component-scan base-package="com.ssm.demo.test" />
+        <!-- 配置文件 -->
+        <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			  <property name="locations">
+				   <list>
+				   		<value>classpath:config.properties</value>
+				   </list>
+			  </property>
+		</bean>
+		
+		<!-- 默认路径及后缀 -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+	        <property name="prefix" value="/WEB-INF/jsp/" />  
+	        <property name="suffix" value=".jsp" />  
+    	</bean>  
+    	
+    	<mvc:resources location="/css/" mapping="/css/**" />
+        <mvc:resources location="/js/" mapping="/js/**" />
+      	<mvc:resources location="/JSCal2-1.9/" mapping="/JSCal2-1.9/**" />
+        
+        
+        <!-- 数据库配置 -->
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource">
+				<ref bean="dataSource" />
+			</property>
+		</bean>
+
+		<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+			<constructor-arg ref="dataSource" />
+		</bean>
+
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${dbDriverName}" />
+			<property name="url" value="${dbUrl}" />
+			<property name="username" value="${dbUserName}" />
+			<property name="password" value="${dbPassword}" />
+		</bean>
+		
+		<!-- mybatis -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="mapperLocations" value="classpath:com/ssm/demo/test/mapper/*Mapper.xml"/>
+		</bean>
+	
+	    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+	        <property name="basePackage" value="com.ssm.demo.test.dao" />  
+	        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	    </bean> 
+	    
+	   
+	   <!-- websocket  -->
+    
+    <bean id="websocket" class="com.ssm.demo.websocket.handler.WebsocketEndPoint"/>  
+      
+    <websocket:handlers>  
+        <websocket:mapping path="/websocket" handler="websocket"/>  
+        <websocket:handshake-interceptors>  
+        <bean class="com.ssm.demo.websocket.handler.HandshakeInterceptor"/>  
+        </websocket:handshake-interceptors>  
+    </websocket:handlers> 
+    
+    <!-- webserver -->
+</beans>

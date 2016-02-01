@@ -1,0 +1,125 @@
+.list_table {
+	border: 1px solid #CCCCCC;
+	border-collapse: collapse;
+	color: #333333;
+	margin: 0 0 0;
+	width: 100%;
+	margin-right: auto;
+    margin-left: auto;
+    table-layout:fixed; 
+}
+
+.list_table thead td {
+	border: solid #ccc;
+	border-width: 0px 1px 1px 0px;
+}
+
+.list_table tbody td {
+	border-top: 1px solid #CCCCCC;
+	text-align: left;
+	border: solid #ccc;
+	border-width: 0px 1px 1px 0px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.list_table th {
+	line-height: 1.2em;
+	vertical-align: top;
+}
+
+.list_table td {
+	line-height: 2em;
+	font-size: 12px;
+	vertical-align: central;
+	align: left;
+}
+
+.list_table td input {
+	width: 90%;
+}
+
+.list_table tbody tr:hover th,.list_table tbody tr:hover td {
+	background: #EEF0F2;
+}
+
+.list_table thead tr {
+	background: none repeat scroll 0 0 #09f;
+	color: #fff;
+	font-weight: bold;
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+.div_cls {
+	width: 80%;
+	margin-right: auto;
+    margin-left: auto;
+}
+
+
+.main ul.mainInfo { width:500px; border-right:0px solid #e1e2e2; min-height: 300px;list-style-type:none}
+.main ul.mainInfo li.title{font:bold 16px/35px "宋体"; border-bottom:1px solid #e5e5e5; margin-bottom:30px; color:#005a7c;}
+.main ul.mainInfo li { margin-bottom:15px;}
+.main ul.mainInfo li em { font-style:normal; width:120px; text-align:right; display:inline-block; padding-right:3px; color:#999;}
+.main ul.mainInfo li strong { color:#d00;}
+.main ul.mainInfo li span.tips { clear:both;display:block;margin:2px 0 0 100px; color:#b30202;}
+.main input { border:1px solid #999; width:298px; height:28px; padding:0 5px; vertical-align:middle; margin-right:5px;}
+
+.btn{ 
+	
+ 	line-height:35px;
+	height:35px;
+	width:120px;
+	margin-right: auto;
+    margin-left: auto;
+	color:#777777;
+	background-color:#ededed;
+	font-size:16px;
+	font-weight:normal;
+	font-family:Arial;
+	background:-webkit-gradient(linear, left top, left bottom, color-start(0.05, #ededed), color-stop(1, #f5f5f5));
+	background:-moz-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #f5f5f5 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#f5f5f5',GradientType=0);
+	border:1px solid #dcdcdc;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+	-webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+	box-shadow: inset 0px 0px 0px 0px #ffffff;
+	text-align:center;
+	display:inline-block;
+	text-decoration:none;
+	margin:0 auto;
+}
+.btn:hover {
+	background-color:#f5f5f5;
+	background:-webkit-gradient(linear, left top, left bottom, color-start(0.05, #f5f5f5), color-stop(1, #ededed));
+	background:-moz-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+	background:-o-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+	background:-ms-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+	background:linear-gradient(to bottom, #f5f5f5 5%, #ededed 100%);
+	background:-webkit-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#ededed',GradientType=0);
+}
+
+.main .tableDiv { width:500px; height:250px; overflow:hidden; overflow-y:auto;}
+.main .tableDiv table { width:100%;border-collapse:collapse;}
+.main .tableDiv table th { background-color:#f7f7f7; text-align:center; font-size:12px;}
+.main .tableDiv table td { text-align:center; text-align:center; font-size:12px; line-height:22px; border-bottom:1px dashed #e8e8e8;}
+.main .tableDiv table input { width:auto; border:none;}
+
