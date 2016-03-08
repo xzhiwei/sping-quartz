@@ -33,14 +33,16 @@
 		
 		<!-- 默认路径及后缀 -->
 		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-	        <property name="prefix" value="/WEB-INF/jsp/" />  
+	        <property name="prefix" value="/WEB-INF/pages/" />  
 	        <property name="suffix" value=".jsp" />  
     	</bean>  
-    	
+ 
+ <!-- 
     	<mvc:resources location="/css/" mapping="/css/**" />
+    	<mvc:resources location="/img/" mapping="/img/**" />
         <mvc:resources location="/js/" mapping="/js/**" />
       	<mvc:resources location="/JSCal2-1.9/" mapping="/JSCal2-1.9/**" />
-        
+  -->  
         
         <!-- 数据库配置 -->
         <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -74,18 +76,5 @@
 	        <property name="basePackage" value="com.ssm.demo.test.dao" />  
 	        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	    </bean> 
-	    
-	   
-	   <!-- websocket  -->
-    
-    <bean id="websocket" class="com.ssm.demo.websocket.handler.WebsocketEndPoint"/>  
-      
-    <websocket:handlers>  
-        <websocket:mapping path="/websocket" handler="websocket"/>  
-        <websocket:handshake-interceptors>  
-        <bean class="com.ssm.demo.websocket.handler.HandshakeInterceptor"/>  
-        </websocket:handshake-interceptors>  
-    </websocket:handlers> 
-    
-    <!-- webserver -->
+
 </beans>

@@ -6,6 +6,13 @@
          
   <display-name>Archetype Created Web Application</display-name>
   
+  <jsp-config>
+    <taglib>
+        <taglib-uri>/tmpl</taglib-uri>
+        <taglib-location>/WEB-INF/tmpl.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+  
   <!-- 字符集 过滤器  -->  
     <filter>  
         <filter-name>CharacterEncodingFilter</filter-name>  
@@ -24,6 +31,42 @@
         <url-pattern>/*</url-pattern>  
     </filter-mapping>
     
+    <servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	    <servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.ttf</url-pattern>
+	</servlet-mapping>
+	    <servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.swf</url-pattern>
+	</servlet-mapping>
+	    <servlet-mapping>
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>*.map</url-pattern>
+	</servlet-mapping>
      <!-- Spring view分发器 -->  
     <servlet>  
         <servlet-name>dispatcher</servlet-name>  
