@@ -9,20 +9,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<!-- STYLESHEETS --><!--[if lt IE 9]><script src="js/flot/excanvas.min.js"></script><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
 	<link rel="stylesheet" type="text/css" href="css/cloud-admin.css" >
 	<link rel="stylesheet" type="text/css"  href="css/themes/default.css" id="skin-switcher" >
-	<link rel="stylesheet" type="text/css"  href="css/responsive.css" >
-	
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="bootstrap-dist/css/bootstrap.min.css" />
+	<!-- 字体加图标样式 -->
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<!-- JQUERY UI-->
 	<link rel="stylesheet" type="text/css" href="js/jquery-ui-1.10.3.custom/css/custom-theme/jquery-ui-1.10.3.custom.min.css" />
-	<!-- DATE RANGE PICKER -->
-	<link rel="stylesheet" type="text/css" href="js/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-	<!-- DATA TABLES -->
-	<link rel="stylesheet" type="text/css" href="js/datatables/media/css/jquery.dataTables.min.css" />
-	<link rel="stylesheet" type="text/css" href="js/datatables/media/assets/css/datatables.min.css" />
-	<link rel="stylesheet" type="text/css" href="js/datatables/extras/TableTools/media/css/TableTools.min.css" />
 	<!-- FONTS -->
 	<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
 	<aa:block name="head" ></aa:block>
@@ -31,7 +25,7 @@
 <!-- HEADER -->
 	<header class="navbar clearfix" id="header">
 		<div class="container">
-				<div class="navbar-brand">
+				<div class="navbar-brand mini-menu">
 					<!-- COMPANY LOGO -->
 					<a href="index.html">
 						<img src="img/logo/logo.png" alt="Cloud Admin Logo" class="img-responsive" height="30" width="120">
@@ -641,12 +635,12 @@
 	<!-- PAGE -->
 	<section id="page">
 				<!-- SIDEBAR -->
-				<div id="sidebar" class="sidebar">
+				<div id="sidebar" class="sidebar mini-menu">
 					<div class="sidebar-menu nav-collapse">
 						<div class="divide-20"></div>
 						<!-- SEARCH BAR -->
 						<div id="search-bar">
-							<input class="search" type="text" placeholder="Search"><i class="fa fa-search search-icon"></i>
+							<input class="search" type="text" placeholder=""><i class="fa fa-search search-icon"></i>
 						</div>
 						<!-- /SEARCH BAR -->
 						
@@ -794,7 +788,9 @@
 					</div>
 				</div>
 				<!-- /SIDEBAR -->
-		<aa:block name="content"></aa:block>
+		<div class="margin-left-50"  id="main-content">
+			<aa:block name="content"></aa:block>
+		</div>
 	</section>
 	<!--/PAGE -->
 	<!-- JAVASCRIPTS -->
@@ -805,24 +801,12 @@
 	<script src="js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
 	<!-- BOOTSTRAP -->
 	<script src="bootstrap-dist/js/bootstrap.min.js"></script>
-	
-		
-	<!-- DATE RANGE PICKER -->
-	<script src="js/bootstrap-daterangepicker/moment.min.js"></script>
-	
-	<script src="js/bootstrap-daterangepicker/daterangepicker.min.js"></script>
 	<!-- SLIMSCROLL -->
-	<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script><script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
+	<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="js/jQuery-slimScroll-1.3.0/slimScrollHorizontal.min.js"></script>
 	<!-- BLOCK UI -->
 	<script type="text/javascript" src="js/jQuery-BlockUI/jquery.blockUI.min.js"></script>
-	<!-- DATA TABLES -->
-	<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
-	<!-- 
-	<script type="text/javascript" src="js/datatables/media/js/jquery.dataTables.min.js"></script>
-	 -->
-	<script type="text/javascript" src="js/datatables/media/assets/js/datatables.min.js"></script>
-	<script type="text/javascript" src="js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
-	<script type="text/javascript" src="js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
+
 	<!-- COOKIE -->
 	<script type="text/javascript" src="js/jQuery-Cookie/jquery.cookie.min.js"></script>
 	<!-- CUSTOM SCRIPT -->

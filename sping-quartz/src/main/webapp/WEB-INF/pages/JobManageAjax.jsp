@@ -56,7 +56,13 @@
 									</ul>
 									<!-- /BREADCRUMBS -->
 									<div class="clearfix">
-										<h3 class="content-title pull-left"></h3>
+										<h3 class="content-title pull-left">
+										<button type="button" class="btn btn-default btn-xs" title=${item["jobName"]==null?"Title":item["jobName"]}  
+															      data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" 
+															      data-content=${item["description"]==""?"无":item["description"]}>
+															      详情
+															   </button>
+										</h3>
 									</div>
 									<div class="description"></div>
 								</div>
@@ -101,56 +107,9 @@
 													<th class="hidden-xs">操作</th>
 												</tr>
 											</thead>
-											<tbody>
-												<c:forEach items="${taskList}" var="item">  
-													<tr onclick="trClick(this)" class="gradeA">
-														 <td>${item.jobId}</td>  
-														 <td>${item["jobName"]==null?"&nbsp;":item["jobName"]}</td>
-														 <td>${item["jobGroup"]==null?"&nbsp;":item["jobGroup"]}</td>
-														  <td class="hidden-xs" >
-														  	<button type="button" class="btn btn-default btn-xs" title=${item["jobName"]==null?"Title":item["jobName"]}  
-															      data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" 
-															      data-content=${item["description"]==""?"无":item["description"]}>
-															      详情
-															   </button>
-   
-														  </td>
-														  
-														 <td class="center">${item["jobType"]==null?"&nbsp;":item["jobType"]}</td>
-														 <td>${item["depandOnList"]==null?"&nbsp;":item["depandOnList"]}</td>
-														 <td class="center">${item["jobStatus"]==null?"&nbsp;":item["jobStatus"]}</td>
-														 <td>
-														 	<c:if test="${item['jobStartTime'] != null}">
-														 		<fmt:formatDate value="${item['jobStartTime']}" pattern="yyyy-MM-dd HH:mm:ss"/>
-														 	</c:if>
-														 </td>
-														 <td>
-														 	<c:if test="${item['jobStartTime'] != null}">
-														 		<fmt:formatDate value="${item['jobEndTime']}" pattern="yyyy-MM-dd HH:mm:ss"/>
-														 	</c:if>
-														 </td>
-														 <td >
-															  <div class="btn-group btn-group-xs" >
-																 	<button class="btn btn-default" onclick="jobCancel()">取消</button>
-																 	<button class="btn btn-default" onclick="jobEdit()">修改</button>
-																 	<button class="btn btn-default" onclick="jobRepeat()">重试</button>
-															 </div>
-														 </td>
-													</tr>
-												</c:forEach>
-											</tbody>
+											
 											<tfoot>
 												<tr>
-													<th>ID</th>
-													<th>名称</th>
-													<th class="hidden-xs">任务组</th>
-													<th class="hidden-xs">描述</th>
-													<th class="hidden-xs">类型</th>
-													<th>依赖</th>
-													<th>状态</th>
-													<th>开始时间</th>
-													<th>结束时间</th>
-													<th class="hidden-xs">操作</th>
 												</tr>
 											</tfoot>
 										</table>
@@ -264,7 +223,7 @@
 <script>
 $(document).ready(function() {
 	//所有hover项被激活
-	 $("[data-toggle='popover']").popover();
+	
 	 //设置表格
     $('#datatable1').dataTable( {
     	language: {
@@ -311,8 +270,81 @@ $(document).ready(function() {
                      	   	sButtonText:"导出"
              			}
              		]
-        }
+        },
+        processing : true,
+     	//serverSide: true, 此处是一次获取全部数据，不属于服务器分页，因此不能设置为true
+         ajax: {
+         	url: 'api/getAllJob.txt',
+         	type: 'POST',
+         	dataSrc: 'data',
+         	error: function (xhr, error, thrown) {
+         		alert(error);
+         	}
+         },
+         "columnDefs": [ 
+					        { 
+						       	 "targets": 0,
+						       	 "data": "jobId" },
+					         {
+								 "targets": 1,
+								 "data": "jobName" },
+							{ 
+								 "targets": 2,
+								 "data": "jobGroup" },
+							{ 
+								 "targets": 3,
+								 "data": null,
+								 "defaultContent": "<button type='button' class='btn btn-default btn-xs' title='Title' "
+														 +"data-container='body' data-trigger='hover' data-toggle='popover' data-placement='right' "
+														 +"data-content='无'>"
+														 +"详情"
+														 +"</button>"
+							},
+							{ 
+								 "targets": 4,
+								 "data": "jobType" },
+							{ 
+								 "targets": 5,
+								 "data": "depandOnList" },
+							{ 
+								 "targets": 6,
+								 "data": "jobStatus" },
+							{ 
+								 "targets": 7,
+								 "data": "jobStartTime" },
+							{ 
+								 "targets": 8,
+								 "data": "jobEndTime" },
+							{
+							    "targets": 9,
+							    "data": null,
+							    "defaultContent": "<div class='btn-group btn-group-xs' >"
+													 	+"<button class='btn btn-default' onclick='jobCancel()'>取消</button>"
+													 	+"<button class='btn btn-default' onclick='jobEdit()'>修改</button>"
+													 	+"<button class='btn btn-default' onclick='jobRepeat()'>重试</button>"
+													 	+"</div>"
+							},
+							{
+				                "targets": 10,//隐藏描述列
+				                "data":"description",
+				                "visible": false,
+				                "searchable": false
+				            }
+         		],
+         		 fnCreatedRow:function( nRow, aData, iDataIndex){
+         			$($(nRow).children()[3]).children().attr({
+                 		"title": aData.jobName==""?" 标题" : aData.jobName,
+                 		"data-content": aData.description=="" ? "无" : aData.description
+                 	});
+                 	return nRow;
+                 },
+        fnInitComplete:function(oSettings, json) {
+        	$("[data-toggle='popover']").popover();
+        },
+       
+        
     } );
+    
     $('.datatable').each(function(){
 		var datatable = $(this);
 		// SEARCH - Add the placeholder for Search and Turn this into in-line form control
@@ -324,7 +356,7 @@ $(document).ready(function() {
 	});
 	 
     $('#plan_start_time').datetimepicker({
-        format: "dd MM yyyy - hh:ii",
+        format: "yyyy-mm-dd hh:ii",
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left"

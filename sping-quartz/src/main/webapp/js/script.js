@@ -1,6 +1,5 @@
 var App = function () {
 
-	var currentPage = ''; // current page
 	var collapsed = false; //sidebar collapsed
 	var is_mobile = false; //is screen mobile?
 	var is_mini_menu = false; //is mini-menu activated
@@ -306,52 +305,6 @@ var App = function () {
 			runResponsiveFunctions(); 
 		}, 50); // wait 50ms until window resize finishes.
 	});
-	/*-----------------------------------------------------------------------------------*/
-	/*	Date Range Picker
-	/*-----------------------------------------------------------------------------------*/
-	var handleDateTimePickers = function () {
-
-        $('#reportrange').daterangepicker(
-            {
-               startDate: moment().subtract('days', 29),
-               endDate: moment(),
-               minDate: '01/01/2012',
-               maxDate: '12/31/2014',
-               dateLimit: { days: 60 },
-               showDropdowns: true,
-               showWeekNumbers: true,
-               timePicker: false,
-               timePickerIncrement: 1,
-               timePicker12Hour: true,
-               ranges: {
-                  'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-                  'Last 30 Days': [moment().subtract('days', 29), moment()],
-                  'This Month': [moment().startOf('month'), moment().endOf('month')]
-               },
-               opens: 'left',
-               buttonClasses: ['btn btn-default'],
-               applyClass: 'btn-small btn-primary',
-               cancelClass: 'btn-small',
-               format: 'MM/DD/YYYY',
-               separator: ' to ',
-               locale: {
-                   applyLabel: 'Submit',
-                   fromLabel: 'From',
-                   toLabel: 'To',
-                   customRangeLabel: 'Custom Range',
-                   daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                   monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                   firstDay: 1
-               }
-            },
-            function(start, end) {
-             console.log("Callback has been called!");
-             $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            }
-         );
-         //Set the initial state of the picker label
-         $('#reportrange span').html('Custom');
-    }
 	
 	/*-----------------------------------------------------------------------------------*/
 	/*	Team View
@@ -1203,7 +1156,9 @@ var App = function () {
 	/*	Data Tables
 	/*-----------------------------------------------------------------------------------*/
 	var handleDataTables = function () {
-		
+		$('#datatable1').dataTable({
+				"sPaginationType": "bs_full"
+			});
 		$('#datatable2').dataTable({
 				"sPaginationType": "bs_full",
 				sDom: "<'row'<'dataTables_header clearfix'<'col-md-4'l><'col-md-8'Tf>r>>t<'row'<'dataTables_footer clearfix'<'col-md-6'i><'col-md-6'p>>>",
@@ -1223,7 +1178,101 @@ var App = function () {
 			length_sel.addClass('form-control input-sm');
 		});
 	}
-	
+	/*-----------------------------------------------------------------------------------*/
+	/*	jqGrid
+	/*-----------------------------------------------------------------------------------*/
+	var handleJqgrid = function () {
+		var grid_data = 
+			[ 
+				{id:"1",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"2",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"3",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"4",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"5",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"6",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"7",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"8",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"9",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"10",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"11",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"12",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"13",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"14",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"15",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"16",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"17",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"18",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"19",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"20",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"21",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"22",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"23",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"24",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"},
+				{id:"25",invdate:"2007-12-03",name:"Client1",amount:"1000.00",tax:"140.00",total:"1000.00", note:"This is a note"}
+			];
+		jQuery("#rowed3").jqGrid({
+			data: grid_data,
+			datatype: "local",
+			height: 250,
+			colNames: ['Inv No', 'Date', 'Client', 'Amount', 'Tax', 'Total', 'Notes'],
+			colModel: [{
+				name: 'id',
+				index: 'id',
+				width: 55
+			}, {
+				name: 'invdate',
+				index: 'invdate',
+				width: 90,
+				editable: true
+			}, {
+				name: 'name',
+				index: 'name',
+				width: 100,
+				editable: true
+			}, {
+				name: 'amount',
+				index: 'amount',
+				width: 80,
+				align: "right",
+				editable: true
+			}, {
+				name: 'tax',
+				index: 'tax',
+				width: 80,
+				align: "right",
+				editable: true
+			}, {
+				name: 'total',
+				index: 'total',
+				width: 80,
+				align: "right",
+				editable: true
+			}, {
+				name: 'note',
+				index: 'note',
+				width: 150,
+				sortable: false,
+				editable: true
+			}],
+			rowNum: 10,
+			rowList: [10, 20, 30],
+			pager: '#prowed3',
+			sortname: 'id',
+			viewrecords: true,
+			sortorder: "asc",
+			editurl: "server.html",
+			caption: "Inline navigator",
+			autowidth: true
+			});
+			jQuery("#rowed3").jqGrid('navGrid', "#prowed3", {
+				edit: false,
+				add: false,
+				del: false
+			});
+			jQuery("#rowed3").jqGrid('inlineNav', "#prowed3");
+			/* Add tooltips */
+			$('.navtable .ui-pg-button').tooltip({container:'body'});
+	}
 	
 	/*-----------------------------------------------------------------------------------*/
 	/*	Typeahead
@@ -3084,122 +3133,8 @@ var App = function () {
 
         //Initialise theme pages
         init: function () {
-		
-            if (App.isPage("index")) {
-				handleDateTimePickers(); //Function to display Date Timepicker
-				handleSparkline();		//Function to display Sparkline charts
-				handleDashFlotCharts(); //Function to display flot charts in dashboard
-				handleChat('chat-window'); //Function to handle chat
-				handleCalendar();	//Function to display calendar
-				handleGritter();	//Function to display Gritter notifications
-            }
-			if (App.isPage("widgets_box")) {
-				handleBoxSortable(); //Function to handle Box sortables
-            }
-			if (App.isPage("elements")) {
-				handleBootbox(); //Function to display Date Timepicker
-				handleMagicSuggest(); //Function to display autosuggest
-				handleDateColorpicker(); //Function to handle date and time picker
-				handleRaty(); //To show star ratings
-				handleTimeAgo(); //Function to handle timestamps
-            }
-			if (App.isPage("button_icons")) {
-				handleStatefulButtons(); //Function to display stateful buttons
-				handleToggle(); 		//Function to handle toggle buttons
-            }
-			if (App.isPage("sliders_progress")) {
-				handleSliders(); //Function to display sliders
-				handleProgress(); //Function to display progress bars
-				handleKnobs();	//Function to display knobs
-            }
-			if (App.isPage("treeview")) {
-				handleTree();	//Function to handle tree display
-			}
-			if (App.isPage("nestable_lists")) {
-				handleNestableLists();	//Function to handle nestable lists
-			}
-			if (App.isPage("simple_table")) {
-				handleTablecloth();	//Function to display tablecloth.js options
-			}
-			if (App.isPage("dynamic_table")) {
-				handleDataTables();	//Function to display data tables
-			}
-			if (App.isPage("jqgrid_plugin")) {
-				handleJqgrid();	//Function to display jqGrid
-			}
-			if (App.isPage("forms")) {
-				handleTypeahead();	//Function to display autocomplete
-				handleAutosize(); //Function to handle textarea autosize
-				handleCountable(); //Function to handle char count
-				handleSelect2(); //Function to handle select2
-				handleUniform();	//Function to handle uniform inputs
-				handleTimeAgo(); //Function to handle timestamps
-			}
-			if (App.isPage("rich_text_editors")) {
-				handleWysiwyg();	//Function to display wysiwyg
-			}
-			if (App.isPage("dropzone_file_upload")) {
-				handleDropzone();	//Function to display wysiwyg
-			}
-			if (App.isPage("xcharts")) {
-				handleXcharts();	//Function to display xcharts
-			}
-			if (App.isPage("others")) {
-				handleGage();	//Function to display justgage
-				handleEasyPie();	//Function to display easy pie charts
-				handleSparkline();	//Function to display sparklines
-			}
-			if (App.isPage("calendar")) {
-				handleCalendar();	//Function to display calendar
-				handleUniform();	//Function to handle uniform inputs
-			}
-			if (App.isPage("vector_maps")) {
-				handleJqvmaps();	//Function to display vector maps
-			}
-			if (App.isPage("gallery")) {
-				handleIsotope();	//Function to display portfolio
-				handleHover();		//Function to display hover-content
-				handleColorbox();		//Function to display colorbox
-			}
-			if (App.isPage("login")) {
-				handleUniform();	//Function to handle uniform inputs
-			}
-			if (App.isPage("wizards_validations")) {
-				handleUniform();	//Function to handle uniform inputs
-			}
-			if (App.isPage("login_bg")) {
-				handleUniform();	//Function to handle uniform inputs
-				handleBackstretch();	//Function to handle background images
-			}
-			if (App.isPage("chats")) {
-				handleChat('chat-window');	//Function to handle chat
-				handleChat('chat-widget');	//Function to handle chat
-				initTimeAgo(); //Function to init timestamps
-			}
-			if (App.isPage("todo_timeline")) {
-				handleTimeline();	//Function to display timeline
-			}
-			if (App.isPage("address_book")) {
-				handleSliderNav();	//Function to display address book
-			}
-			if (App.isPage("orders")) {
-				initTimeAgo(); //Function to init timestamps
-			}
-			if (App.isPage("faq")) {
-				handleActiveToggle(); //Function to handle active toggle
-			}
-			if (App.isPage("user_profile")) {
-				handleProfileSkillPie(); //Function to show skills in pie
-				handleSparkline();	//Function to display sparklines
-				handleUniform();	//Function to handle uniform inputs
-				handleProfileEdit();	//Function to handle profile edit tab
-			}
-			if (App.isPage("mini_sidebar")) {
-				collapseSidebar();	//Function to display mini menu				
-			}
-			if (App.isPage("fixed_header_sidebar")) {
-				handleFixedSidebar();	//Function to display fixed sidebar
-			}
+			collapseSidebar();	//Function to display mini menu		
+			handleFixedSidebar();	//Function to display fixed sidebar
 			checkLayout();	//Function to check if mini menu/fixed header is activated
 			handleSidebar(); //Function to display the sidebar
 			handleSidebarCollapse(); //Function to hide or show sidebar
@@ -3218,14 +3153,6 @@ var App = function () {
 			handleThemeSkins();		//Function to handle theme skins
         },
 
-        //Set page
-        setPage: function (name) {
-            currentPage = name;
-        },
-
-        isPage: function (name) {
-            return currentPage == name ? true : false;
-        },
 		//public function to add callback a function which will be called on window resize
         addResponsiveFunction: function (func) {
             responsiveFunctions.push(func);
