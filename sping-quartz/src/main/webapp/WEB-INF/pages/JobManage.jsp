@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="js/datatables/media/assets/css/datatables.min.css" />
 <link rel="stylesheet" type="text/css" href="js/datatables/extras/TableTools/media/css/TableTools.min.css" />
 <!-- bootstrap-datetimepicker 组件 -->
-<link rel="stylesheet" type="text/css" href="js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="js/datetimepicker/css/bootstrap-datetimepicker.min.css" />
 </tmpl:overwrite>
 <!-- 正文 -->
 <tmpl:overwrite name="content">
@@ -260,7 +260,7 @@
 <script type="text/javascript" src="js/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
 <script type="text/javascript" src="js/datatables/extras/TableTools/media/js/ZeroClipboard.min.js"></script>
 <!-- bootstrap-datetimepicker 组件 -->
-<script type="text/javascript" src="js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script>
 $(document).ready(function() {
 	//所有hover项被激活

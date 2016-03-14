@@ -3,7 +3,6 @@ package com.ssm.demo.test.controller;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -28,12 +29,20 @@ import com.ssm.demo.test.vo.ScheduleJob;
 
 @Controller
 public class ScheduleJobController {
+	Logger logger = LoggerFactory.getLogger(ScheduleJobController.class);
 	
 	@Autowired
 	ScheduleJobService scheduleJobService;
 	
 	@Autowired
 	ScheduleJobMapper ScheduleJobMapper;
+
+	private static JsonConfig jsonConfig;
+	
+	static{
+		jsonConfig = new JsonConfig();  
+		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor()); 
+	}
 	
 	@RequestMapping("addAll")
 	public void addAllJob(){
@@ -54,99 +63,53 @@ public class ScheduleJobController {
 	
 	@RequestMapping("jobManageAjax")
 	public String getAllJobList1(HttpServletRequest request,HttpServletResponse response){
-		return "jobManageAjax";
+		return "JobManageAjax";
 	}
 	
 	@RequestMapping("api/getAllJob.txt")
 	public void getAllJobInfo(HttpServletRequest request,HttpServletResponse response){
 		List<ScheduleJob> taskList =  scheduleJobService.getAllJobFromDb();
-		System.out.println(taskList.size());
+		logger.info("查询所有任务列表，任务数量："+ taskList.size());
 		try {
-			HashMap m = new HashMap();
+			HashMap<String, Object> m = new HashMap<String, Object>();
 			m.put("data", taskList);
 			m.put("draw", 1);
 			m.put("recordsTotal", taskList.size());
 			m.put("recordsFiltered", taskList.size());
-			JsonConfig jsonConfig = new JsonConfig();  
-			jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor()); 
-		    JSONObject json = new JSONObject();  
 		    //Map转JSON  
-			String s = json.fromObject(m,jsonConfig).toString();
+			String s = JSONObject.fromObject(m,jsonConfig).toString();
 			response.getWriter().write(s);
 			response.getWriter().flush();
 			response.getWriter().close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
-	@RequestMapping("api/getAllJobArray.txt")
-	public void getAllJobInfo1(HttpServletRequest request,HttpServletResponse response){
-		List<ScheduleJob> taskList =  scheduleJobService.getAllJobFromDb();
-		System.out.println(taskList.size());
+	@RequestMapping("api/getJobById.txt")
+	public void getJobById(HttpServletRequest request,HttpServletResponse response){
+		ScheduleJob job =  scheduleJobService.getTaskById(Integer.parseInt(request.getParameter("jobId")));
+		logger.info("查询任务Id【{}】列表信息",request.getParameter("jobId"));
 		try {
-			HashMap m = new HashMap();
-			List ll = new ArrayList();
-			for(int i=0;i<taskList.size();i++){
-				ScheduleJob job = taskList.get(i);
-				List l = new ArrayList();
-				l.add(job.getJobId());
-				l.add(job.getJobName());
-				l.add(job.getJobGroup());
-				l.add(job.getDescription());
-				l.add(job.getJobType());
-				l.add(job.getDepandOnList());
-				l.add(job.getJobStatus());
-				l.add(job.getJobStartTime());
-				l.add(job.getJobEndTime());
-				l.add(job.getJobEndTime());
-				ll.add(l);
+			HashMap<String, Object> m = new HashMap<String, Object>();
+			if(job != null){
+				m.put("data", job);
+				m.put("success", true);	
+			} else {
+				m.put("success", false);
 			}
-			m.put("data", ll);
-			JsonConfig jsonConfig = new JsonConfig();  
-			jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor()); 
-		    JSONObject json = new JSONObject();  
 		    //Map转JSON  
-			String s = json.fromObject(m,jsonConfig).toString();
+			String s = JSONObject.fromObject(m,jsonConfig).toString();
 			response.getWriter().write(s);
 			response.getWriter().flush();
 			response.getWriter().close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
 	
 	public static void main(String[] args) {
-		ScheduleJob job1 = new ScheduleJob();
-		job1.setJobId(1);
-		List<ScheduleJob> taskList =  new ArrayList<ScheduleJob>();
-		taskList.add(job1);
-		taskList.add(job1);
-		HashMap m = new HashMap();
-		List ll = new ArrayList();
-		for(int i=0;i<taskList.size();i++){
-			ScheduleJob job = taskList.get(i);
-			List l = new ArrayList();
-			l.add(job.getJobId());
-			l.add(job.getJobName());
-			l.add(job.getJobGroup());
-			l.add(job.getDescription());
-			l.add(job.getJobType());
-			l.add(job.getDepandOnList());
-			l.add(job.getJobStatus());
-			l.add(job.getJobStartTime());
-			l.add(job.getJobEndTime());
-			ll.add(l);
-		}
-		m.put("data", ll);
-		JsonConfig jsonConfig = new JsonConfig();  
-		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor()); 
-	    JSONObject json = new JSONObject();  
-	    //Map转JSON  
-		String s = json.fromObject(m,jsonConfig).toString();
-		System.out.println(s);
 	}
 	
 	@InitBinder
@@ -157,9 +120,24 @@ public class ScheduleJobController {
 		}
 	
 	@RequestMapping("addJobNow")
-	public String addJobNow(ScheduleJob job ){
-		ScheduleJobMapper.insert(job);
-		return "AddJob";
+	public void addJobNow(ScheduleJob job,HttpServletResponse response ){
+		HashMap<String, Object> m = new HashMap<String, Object>();
+		try{
+			ScheduleJobMapper.insert(job);
+			logger.info("插入任务成功，任务ID：" + job.getTaskId());
+			m.put("success", true);
+		} catch(Exception e){
+			logger.error("数据库操作异常",e);
+			m.put("success", false);
+		}
+		try {
+			String s = JSONObject.fromObject(m,jsonConfig).toString();
+			response.getWriter().write(s);
+			response.getWriter().flush();
+			response.getWriter().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("hello")
